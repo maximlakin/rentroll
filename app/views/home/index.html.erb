@@ -1,6 +1,6 @@
 <h3>Add a Property:</h3>
 <%=form_for @property, :html=>{:class=>"form-inline"} do |f|%>
-	<%if session[:errors].any?%>
+	<%if session[:errors] && session[:errors].any?%>
 		<div class="alert alert-error">
 	  		<button type="button" class="close" data-dismiss="alert">&times;</button>
 	  		<strong>Error!</strong> Address <%=session[:errors].messages[:address][0]%>
@@ -10,10 +10,31 @@ Address: <%=f.text_field :address%>
 <%=f.submit "Add", :class=>"btn"%>
 <%end%>
 
-<h3>All Properties:</h3>
+<h3>All Properties <span class="muted">(<%=Property.all.size%> properties)</span></h3>
+<table class="table table-condensed table-hover">
+	<tr>
+		<th>
+			<%if params[:sort]!="id"%>
+			<%=link_to "ID", params.merge(:sort=>"id",:page=>nil)%>
+			<%else%>
+			ID
+			<%end%>
+		</th>
+		<th>
+			<%if params[:sort]!="address"%>
+			<%=link_to "Address", params.merge(:sort=>"address",:page=>nil)%>
+			<%else%>
+			Address
+			<%end%>
+		</th>
+	</tr>
 <%@properties.each do |p|%>
-<%=link_to "#{p.address}", property_url(p)%> (<%=link_to "delete", property_url(p), :method=>:delete, :confirm=>"Are you sure?", :class=>"muted"%>)<br>
+	<tr>
+		<td><%=p.id%></td>
+		<td><%=link_to "#{p.address}", property_url(p)%> (<%=link_to "delete", property_url(p), :method=>:delete, :confirm=>"Are you sure?", :class=>"muted"%>)</td>
+	</td>
 <%end%>
+</table>
 <%= will_paginate @properties %>
 
-<%=debug (params)%>
+<%=@somevar%>

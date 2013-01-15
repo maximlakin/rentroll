@@ -1,11 +1,13 @@
 class HomeController < ApplicationController
+  
   def index
     if params[:query] && params[:query].size
-      @properties = Property.where("address LIKE ?", "%#{params[:query]}%").paginate(:page => params[:page], :per_page => 5)
+      @properties = Property.where("address LIKE ?", "%#{params[:query]}%").order(sort_column).paginate(:page => params[:page], :per_page => 5)
     else
-  	 @properties = Property.paginate(:page => params[:page], :per_page => 5)
+  	 @properties = Property.order(sort_column).paginate(:page => params[:page], :per_page => 5)
     end
   	@property = Property.new
+    @somevar = @property.some_calc
   end
 
   def assumptions
@@ -17,5 +19,11 @@ class HomeController < ApplicationController
   	session[:assumptions][:relocate] = params[:relocate]
   	#render :text => params.inspect
   	redirect_to assumptions_url
+  end
+
+  private
+
+  def sort_column
+    params[:sort] || "address"
   end
 end

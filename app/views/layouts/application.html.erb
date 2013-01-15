@@ -16,7 +16,8 @@
       <li><%=link_to "Assumptions", assumptions_url%></li>
     </ul>
     <%=form_tag root_url, :class=>"navbar-search pull-left" do %>
-      <%=text_field_tag :query, nil, :class=>"search-query", :placeholder=>"Search"%>
+      <%=text_field_tag :query, params[:query], :class=>"search-query", :placeholder=>"Search"%>
+      <%=hidden_field_tag :sort, params[:sort]%>
     <%end%>
   </div>
 </div>
