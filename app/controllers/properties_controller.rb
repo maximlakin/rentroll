@@ -2,6 +2,7 @@ class PropertiesController < ApplicationController
 	def create
 		property = Property.new(params[:property])
 		property.save
+		session[:errors]=property.errors
 		redirect_to root_url
 	end
 

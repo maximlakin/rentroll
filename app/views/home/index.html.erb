@@ -1,5 +1,11 @@
 <h3>Add a Property:</h3>
 <%=form_for @property, :html=>{:class=>"form-inline"} do |f|%>
+	<%if session[:errors].any?%>
+		<div class="alert alert-error">
+	  		<button type="button" class="close" data-dismiss="alert">&times;</button>
+	  		<strong>Error!</strong> Address <%=session[:errors].messages[:address][0]%>
+		</div>
+	<%end%>
 Address: <%=f.text_field :address%>
 <%=f.submit "Add", :class=>"btn"%>
 <%end%>
@@ -9,3 +15,5 @@ Address: <%=f.text_field :address%>
 <%=link_to "#{p.address}", property_url(p)%> (<%=link_to "delete", property_url(p), :method=>:delete, :confirm=>"Are you sure?", :class=>"muted"%>)<br>
 <%end%>
 <%= will_paginate @properties %>
+
+<%=debug (params)%>
