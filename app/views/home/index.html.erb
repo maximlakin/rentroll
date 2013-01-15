@@ -1,0 +1,10 @@
+<h3>Add a Property:</h3>
+<%=form_for @property, :html=>{:class=>"form-inline"} do |f|%>
+Address: <%=f.text_field :address%>
+<%=f.submit "Add", :class=>"btn"%>
+<%end%>
+
+<h3>All Properties:</h3>
+<%@properties.each do |p|%>
+<%=link_to "#{p.address}", property_url(p)%> (<%=link_to "delete", property_url(p), :method=>:delete, :confirm=>"Are you sure?", :class=>"muted"%>)<br>
+<%end%>

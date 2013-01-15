@@ -1,0 +1,6 @@
+<h3>Edit Assumptions</h3>
+<%=form_tag update_assumptions_url do %>
+Market Rent: <%=text_field_tag :market_rent, @assumptions[:market_rent]%><br>
+Relocate: <%=text_field_tag :relocate, @assumptions[:relocate]%><br>
+<%=submit_tag "Update", :class=>"btn"%>
+<%end%>

@@ -1,0 +1,48 @@
+<h3><%=@property.address%> <span class="muted">(<%=link_to "edit", edit_property_url(@property), :class=>"muted"%>)</span></h3>
+<%if @units.size!=0%>
+	<table class="table table-condensed table-hover">
+		<tr>
+			<td>Unit #</td>
+			<td>Move-in</td>
+			<td>Current Rent</td>
+		</tr>
+	<%@units.each do |u|%>
+		<tr>
+			<td><%=u.unumber%></td>
+			<td><%=u.move_in%></td>
+			<td><%=number_to_currency(u.current_rent)%></td>
+		</tr>
+	<%end%>
+	</table>
+<h3>Analysis</h3>
+	Total: <%=number_to_currency(@total)%>
+	<%else%>
+	<p class="muted">No units to display</p>
+<%end%>
+<h3>Add Unit</h3>
+<%=form_for [@property,@unit], :html=>{:class=>"form-horizontal"} do |f|%>
+	<div class="control-group">
+		<%=f.label :unumber,"Unit",:class=>"control-label"%>
+		<div class="controls">
+			<%=f.text_field :unumber%>
+		</div>
+	</div>
+	<div class="control-group">
+		<%=f.label :unumber,"Move-in",:class=>"control-label"%>
+		<div class="controls">
+			<%=f.date_select :move_in%>
+		</div>
+	</div>
+	<div class="control-group">
+		<%=f.label :unumber,"Current Rent",:class=>"control-label"%>
+		<div class="controls">
+			<%=f.text_field :current_rent%>
+		</div>
+	</div>
+	<div class="control-group">
+		<div class="controls">
+			<%=f.submit "Add Unit", :class=>"btn"%>
+		</div>
+	</div>
+<%end%>
+<h1><%=number_to_currency(@ttl)%></h1>

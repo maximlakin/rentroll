@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  property_id: 1
+  unumber: 1
+  move_in: 2013-01-09
+  current_rent: 9.99
+
+two:
+  property_id: 1
+  unumber: 1
+  move_in: 2013-01-09
+  current_rent: 9.99
