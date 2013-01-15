@@ -1,6 +1,10 @@
 class HomeController < ApplicationController
   def index
-  	@properties = Property.all
+    if params[:query] && params[:query].size
+      @properties = Property.where("address LIKE ?", "%#{params[:query]}%").paginate(:page => params[:page], :per_page => 5)
+    else
+  	 @properties = Property.paginate(:page => params[:page], :per_page => 5)
+    end
   	@property = Property.new
   end
 
